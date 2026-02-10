@@ -1,0 +1,4 @@
+packages:
+  - 'platforms/*'
+  - 'shared-libs/*'
+  - 'tools/*'
