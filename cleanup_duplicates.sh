@@ -63,7 +63,6 @@ if [ -d scripts ] && [ -d control/tooling/scripts ]; then
     rm -rf scripts
     echo "✓ scripts/ removed"
 else
-并发
     echo "⊘ scripts/ check needed"
 fi
 
