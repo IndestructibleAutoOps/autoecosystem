@@ -51,7 +51,9 @@ log "✓ 目標目錄已創建"
 
 # 步驟 4：複製內容
 log "步驟 4：複製內容"
+shopt -s dotglob
 cp -r "$SOURCE/"* "$TARGET/" 2>&1 | tee -a "$LOG_FILE"
+shopt -u dotglob
 log "✓ 內容已複製"
 
 # 步驟 5：驗證複製
@@ -90,8 +92,15 @@ log "✓ pnpm-workspace.yaml 存在"
 # 步驟 7：更新 package.json
 log "步驟 7：更新 package.json"
 if command -v sed &> /dev/null; then
-    sed -i 's/"name": "config"/"name": "platform-1"/g' "$TARGET/package.json"
-    log "✓ package.json 已更新"
+    # 使用便攜方式更新 package.json 中的 name 字段
+    if sed 's/"name":[[:space:]]*"[^"]*"/"name": "platform-1"/' "$TARGET/package.json" > "$TARGET/package.json.tmp"; then
+        mv "$TARGET/package.json.tmp" "$TARGET/package.json"
+        log "✓ package.json 已更新"
+    else
+        log "錯誤：更新 package.json 失敗，請手動檢查並更新 name 字段"
+        rm -f "$TARGET/package.json.tmp"
+        exit 1
+    fi
 else
     log "警告：sed 命令不可用，跳過更新"
     log "請手動更新 package.json 中的包名稱"
