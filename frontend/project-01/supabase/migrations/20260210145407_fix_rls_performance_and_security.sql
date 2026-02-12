@@ -8,7 +8,8 @@
      - Apply to projects table only (other tables don't exist in this migration set)
   
   2. **Fix Function Search Paths**
-     - Set stable search paths for functions
+     - Set stable search paths for update_updated_at_column function
+     - Other functions (e.g., match_document_chunks) don't exist in this migration set
   
   ## Performance Impact
   
