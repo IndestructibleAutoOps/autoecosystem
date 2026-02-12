@@ -66,12 +66,10 @@ BEGIN
   IF EXISTS (
     SELECT 1 FROM pg_proc WHERE proname = 'update_updated_at_column'
   ) THEN
-    EXECUTE '
-      CREATE TRIGGER update_agent_tasks_updated_at
-        BEFORE UPDATE ON agent_tasks
-        FOR EACH ROW
-        EXECUTE FUNCTION update_updated_at_column()
-    ';
+    CREATE TRIGGER update_agent_tasks_updated_at
+      BEFORE UPDATE ON agent_tasks
+      FOR EACH ROW
+      EXECUTE FUNCTION update_updated_at_column();
   END IF;
 END $$;
 

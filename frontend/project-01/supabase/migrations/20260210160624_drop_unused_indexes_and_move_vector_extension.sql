@@ -35,7 +35,7 @@ BEGIN
       -- Create the target schema if it does not already exist
       CREATE SCHEMA IF NOT EXISTS extensions;
       -- Move vector extension to the extensions schema
-      EXECUTE 'ALTER EXTENSION vector SET SCHEMA extensions';
+      ALTER EXTENSION vector SET SCHEMA extensions;
     END IF;
   END IF;
 END $$;
