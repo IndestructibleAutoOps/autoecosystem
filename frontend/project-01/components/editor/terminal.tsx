@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Terminal as TerminalIcon, Play } from 'lucide-react';
@@ -31,11 +30,11 @@ export function Terminal() {
   const [currentCommand, setCurrentCommand] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (viewportRef.current) {
+      viewportRef.current.scrollTop = viewportRef.current.scrollHeight;
     }
   }, [lines]);
 
@@ -158,7 +157,7 @@ export function Terminal() {
 
       {/* Terminal Content */}
       <div className="flex-1 flex flex-col">
-        <ScrollArea className="flex-1 p-4 font-mono text-sm" ref={scrollRef}>
+        <div className="flex-1 overflow-auto p-4 font-mono text-sm" ref={viewportRef}>
           <div className="space-y-1">
             {lines.map((line) => (
               <div
@@ -169,7 +168,7 @@ export function Terminal() {
               </div>
             ))}
           </div>
-        </ScrollArea>
+        </div>
 
         {/* Command Input */}
         <div className="border-t border-border p-4">
