@@ -7,11 +7,17 @@ set -e
 
 echo "🚀 Initializing AutoEcoOps Environment..."
 
-# 1. Configure Git Local Settings
-echo "📝 Configuring local Git settings..."
-git config user.email "evolution@autoecoops.io"
-git config user.name "AutoEcoOps Bot"
-echo "✅ Git configured: $(git config user.name) <$(git config user.email)>"
+# 1. Configure Git Local Settings (only if not already set)
+echo "📝 Checking local Git settings..."
+# Use || true to prevent set -e from exiting if git config is unset
+if [ -z "$(git config user.name 2>/dev/null || true)" ] || [ -z "$(git config user.email 2>/dev/null || true)" ]; then
+    echo "Setting default Git identity for AutoEcoOps..."
+    git config user.email "evolution@autoecoops.io"
+    git config user.name "AutoEcoOps Bot"
+    echo "✅ Git configured: $(git config user.name) <$(git config user.email)>"
+else
+    echo "ℹ️ Git identity already configured: $(git config user.name) <$(git config user.email)>"
+fi
 
 # 2. Create .env file if it doesn't exist
 if [ ! -f .env ]; then

@@ -17,7 +17,7 @@ updates:
 
   # 2. npm（前端用，如果你在 frontend/ 裡有 package.json）
   - package-ecosystem: "npm"
-    directory: "/frontend"      # ← 注意這裡改成 /frontend
+    directory: "/frontend/project-01"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10

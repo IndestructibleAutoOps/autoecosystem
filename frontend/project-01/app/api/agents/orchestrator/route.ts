@@ -4,7 +4,11 @@ import Groq from 'groq-sdk';
 import { z } from 'zod';
 
 function getGroqClient() {
-  return new Groq({ apiKey: process.env.GROQ_API_KEY || '' });
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    throw new Error('GROQ_API_KEY environment variable is not set');
+  }
+  return new Groq({ apiKey });
 }
 
 const requestSchema = z.object({

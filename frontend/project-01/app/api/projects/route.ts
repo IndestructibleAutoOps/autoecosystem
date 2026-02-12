@@ -6,7 +6,6 @@ const createProjectSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
   language: z.string(),
-  template: z.string().optional(),
 });
 
 export async function GET() {
@@ -30,6 +29,7 @@ export async function GET() {
 
     return NextResponse.json(projects);
   } catch (error) {
+    console.error('Error fetching projects:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

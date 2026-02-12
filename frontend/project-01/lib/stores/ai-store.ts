@@ -19,7 +19,7 @@ interface AIState {
   clearMessages: () => void;
 }
 
-export const useAIStore = create<AIState>((set, get) => ({
+export const useAIStore = create<AIState>((set) => ({
   messages: [],
   isLoading: false,
   isOpen: false,
