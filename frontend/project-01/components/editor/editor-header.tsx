@@ -77,7 +77,6 @@ export function EditorHeader({ isTerminalOpen, onToggleTerminal }: EditorHeaderP
       });
 
       if (response.ok) {
-        const result = await response.json();
         toast.success('Code executed successfully!');
         // You could display the output in the terminal or a modal
       } else {

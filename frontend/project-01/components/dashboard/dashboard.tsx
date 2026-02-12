@@ -4,7 +4,7 @@ import { useAuth } from '@/providers/auth-provider';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Code, Calendar, User, LogOut, Settings } from 'lucide-react';
 import { ProjectList } from './project-list';
 import { CreateProjectDialog } from './create-project-dialog';

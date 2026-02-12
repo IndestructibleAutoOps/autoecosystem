@@ -82,7 +82,6 @@ export function AIAssistant() {
       return;
     }
 
-    const file = files[currentFile];
     const actions: Record<string, { message: string; type: 'explain' | 'refactor' | 'debug' | 'complete' }> = {
       explain: {
         message: 'Explain this code',

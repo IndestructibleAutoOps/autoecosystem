@@ -49,7 +49,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = createProjectSchema.parse(body);
 
-    // @ts-expect-error - Supabase type inference issue
     const { data: project, error } = await supabase
       .from('projects')
       .insert([
@@ -57,7 +56,7 @@ export async function POST(request: NextRequest) {
           ...validatedData,
           user_id: user.id,
           files: {
-            'main.js': '// Welcome to AIForge!\nconsole.log("Hello, World!");'
+            'main.js': '// Welcome to autoecoops!\nconsole.log("Hello, World!");'
           }
         }
       ])

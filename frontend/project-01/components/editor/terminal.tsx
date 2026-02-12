@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Terminal as TerminalIcon, Play, X } from 'lucide-react';
+import { Terminal as TerminalIcon, Play } from 'lucide-react';
 
 interface TerminalLine {
   id: string;
@@ -17,7 +17,7 @@ export function Terminal() {
   const [lines, setLines] = useState<TerminalLine[]>([
     {
       id: '1',
-      content: 'Welcome to AIForge Terminal',
+      content: 'Welcome to autoecoops Terminal',
       type: 'output',
       timestamp: new Date(),
     },

@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { code, language, input } = executeRequestSchema.parse(body);
+    const { code, language } = executeRequestSchema.parse(body);
 
     // For this MVP, we'll simulate code execution
     // In production, you would integrate with a secure sandbox environment

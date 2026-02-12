@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Code, Calendar, MoveHorizontal as MoreHorizontal, Trash2, CreditCard as Edit } from 'lucide-react';
+import { Code, Calendar, MoreHorizontal, Trash2, CreditCard as Edit } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,

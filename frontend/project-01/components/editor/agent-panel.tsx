@@ -38,7 +38,7 @@ const TABS: { key: AgentTab; label: string }[] = [
 ];
 
 export function AgentPanel() {
-  const { activeTab, setActiveTab, selectedAgent, setSelectedAgent, isRunning, currentTask } = useAgentStore();
+  const { activeTab, setActiveTab, selectedAgent, setSelectedAgent, isRunning } = useAgentStore();
 
   return (
     <div className="h-full flex flex-col bg-card/80 backdrop-blur-sm border-l border-border overflow-hidden">

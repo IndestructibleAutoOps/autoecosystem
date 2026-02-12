@@ -18,7 +18,6 @@ import {
 import { useAgentStore } from '@/lib/stores/agent-store';
 import type { AgentArtifact } from '@/types/agents';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
 
 const TYPE_ICONS: Record<AgentArtifact['type'], React.ReactNode> = {
   code: <Code className="h-4 w-4 text-emerald-400" />,

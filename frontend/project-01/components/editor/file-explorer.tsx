@@ -9,7 +9,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu';
-import { File, Folder, FolderOpen, Plus, FileText, MoveHorizontal as MoreHorizontal, Trash2 } from 'lucide-react';
+import { File, Plus, FileText, Trash2 } from 'lucide-react';
 import { useProjectStore } from '@/lib/stores/project-store';
 import type { File as FileType } from '@/lib/stores/project-store';
 import { toast } from 'sonner';

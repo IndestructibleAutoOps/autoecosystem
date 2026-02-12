@@ -62,13 +62,10 @@ export function CreateProjectDialog({
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
     reset,
   } = useForm<CreateProjectForm>({
     resolver: zodResolver(createProjectSchema),
   });
-
-  const selectedLanguage = watch('language');
 
   const onSubmit = async (data: CreateProjectForm) => {
     setIsLoading(true);
