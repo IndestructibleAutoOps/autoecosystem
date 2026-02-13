@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import { config } from '../config';
-import { logger } from './logger.service';
 import type { ApiResponse, AuditEntry, SearchResult, PolicyDecision } from '@autoecops/shared-types';
 
 // ============================================================================
