@@ -15,6 +15,10 @@ app.use(helmet());
 app.use(cors({
   origin: process.env.ALLOWED_ORIGINS?.split(',') ?? '*',
   credentials: Boolean(process.env.ALLOWED_ORIGINS),
+const allowedOrigins = process.env.ALLOWED_ORIGINS;
+app.use(cors({
+  origin: allowedOrigins?.split(',') ?? '*',
+  credentials: Boolean(allowedOrigins),
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(compression());
