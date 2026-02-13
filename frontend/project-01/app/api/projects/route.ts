@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
 
     const { data: project, error } = await supabase
       .from('projects')
+      // @ts-expect-error - Supabase type inference issue with Insert type
       .insert([
         {
           ...validatedData,

@@ -56,10 +56,8 @@ const ChartContainer = React.forwardRef<
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        {/* @ts-expect-error - React version mismatch with recharts */}
         <RechartsPrimitive.ResponsiveContainer>
-          {/* @ts-expect-error - React version mismatch */}
-          {children}
+          {children as React.ReactElement}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
     </ChartContext.Provider>
