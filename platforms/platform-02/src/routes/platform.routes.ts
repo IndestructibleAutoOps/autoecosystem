@@ -60,6 +60,11 @@ router.post('/deploy', async (req: Request, res: Response): Promise<void> => {
 
   try {
     const result = await triggerDeployment({ application, environment: environment as 'development' | 'staging' | 'production', imageTag });
+    const result = await triggerDeployment({ 
+      application, 
+      environment: environment as 'development' | 'staging' | 'production', 
+      imageTag 
+    });
     res.status(202).json({
       success: true, data: result,
       meta: { requestId: uuidv4(), traceId: (req.headers['x-trace-id'] as string) ?? uuidv4(), timestamp: new Date().toISOString() },

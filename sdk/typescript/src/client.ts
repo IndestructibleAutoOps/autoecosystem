@@ -59,13 +59,13 @@ export class EcosystemClient {
     let lastError: Error | undefined;
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(
-          () => controller.abort(),
-          options.timeout ?? this.config.timeout,
-        );
+      const controller = new AbortController();
+      const timeoutId = setTimeout(
+        () => controller.abort(),
+        options.timeout ?? this.config.timeout,
+      );
 
+      try {
         const headers: Record<string, string> = {
           'Content-Type': 'application/json',
           ...tracing.toHeaders(),
@@ -81,8 +81,6 @@ export class EcosystemClient {
           body: body ? JSON.stringify(body) : undefined,
           signal: controller.signal,
         });
-
-        clearTimeout(timeoutId);
 
         if (!response.ok) {
           const errorBody = await response.text();
@@ -121,13 +119,15 @@ export class EcosystemClient {
           const delay = this.config.retryDelayMs * Math.pow(2, attempt);
           await new Promise((resolve) => setTimeout(resolve, delay));
         }
+      } finally {
+        clearTimeout(timeoutId);
       }
     }
 
     throw new NetworkError(
       lastError?.message ?? 'Request failed after retries',
       this.config.baseUrl,
-      createTrace().traceId,
+      tracing.traceId,
     );
   }
 }

@@ -1,8 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { checkBaselineDrift, registerNode, getInventory, getNode } from '../services/baseline.service';
-import { registerAgent, updateHeartbeat, getAgents, getAgent } from '../services/edge.agent';
-import { logger } from '../services/logger.service';
+import { registerAgent, updateHeartbeat, getAgents } from '../services/edge.agent';
 
 const router = Router();
 
