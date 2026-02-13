@@ -13,6 +13,18 @@ router.post('/nodes/register', (req: Request, res: Response): void => {
     res.status(400).json({ success: false, error: { code: 'MISSING_FIELDS', message: 'nodeId and hostname are required' } });
     return;
   }
+
+  // Validate required nested fields for drift checking
+  if (!baseline.securityBaseline || typeof baseline.securityBaseline !== 'object') {
+    res.status(400).json({ success: false, error: { code: 'INVALID_BASELINE', message: 'securityBaseline object is required' } });
+    return;
+  }
+
+  if (!Array.isArray(baseline.services)) {
+    res.status(400).json({ success: false, error: { code: 'INVALID_BASELINE', message: 'services array is required' } });
+    return;
+  }
+
   registerNode(baseline);
   res.status(201).json({ success: true, data: { nodeId: baseline.nodeId }, meta: { requestId: uuidv4(), timestamp: new Date().toISOString() } });
 });
@@ -38,6 +50,26 @@ router.post('/agents/register', (req: Request, res: Response): void => {
     res.status(400).json({ success: false, error: { code: 'MISSING_FIELDS', message: 'agentId and nodeId are required' } });
     return;
   }
+
+  // Validate and set defaults for heartbeat monitoring
+  if (!agent.lastHeartbeat) {
+    agent.lastHeartbeat = new Date().toISOString();
+  } else {
+    // Validate lastHeartbeat is a valid ISO date
+    const heartbeatDate = new Date(agent.lastHeartbeat);
+    if (isNaN(heartbeatDate.getTime())) {
+      res.status(400).json({ success: false, error: { code: 'INVALID_DATE', message: 'lastHeartbeat must be a valid ISO 8601 date' } });
+      return;
+    }
+  }
+
+  if (!agent.status) {
+    agent.status = 'online';
+  } else if (!['online', 'offline', 'degraded'].includes(agent.status)) {
+    res.status(400).json({ success: false, error: { code: 'INVALID_STATUS', message: 'status must be one of: online, offline, degraded' } });
+    return;
+  }
+
   registerAgent(agent);
   res.status(201).json({ success: true, data: { agentId: agent.agentId }, meta: { requestId: uuidv4(), timestamp: new Date().toISOString() } });
 });
