@@ -12,9 +12,9 @@ import type { HealthCheck } from '@autoecops/shared-types';
 const app = express();
 
 app.use(helmet());
-const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',');
+const allowedOrigins = process.env.ALLOWED_ORIGINS;
 app.use(cors({
-  origin: allowedOrigins ?? '*',
+  origin: allowedOrigins?.split(',') ?? '*',
   credentials: Boolean(allowedOrigins),
 }));
 app.use(express.json({ limit: '5mb' }));
@@ -46,6 +46,7 @@ app.use('/', policyRoutes); // Mount audit and reports at root too
 app.use((_req, res) => { res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Resource not found' } }); });
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  void _next;
   logger.error({ err }, 'Unhandled error');
   res.status(500).json({ success: false, error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } });
 });
