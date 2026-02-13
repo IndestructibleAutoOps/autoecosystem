@@ -6,3 +6,4 @@ packages:
   - 'tools/*'
   - 'apps/*'
   - 'packages/*'
+  - 'frontend/*'
