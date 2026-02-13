@@ -10,7 +10,9 @@ import platformRoutes from './routes/platform.routes';
 
 const app = express();
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') ?? '*';
 app.use(helmet());
+app.use(cors({ origin: allowedOrigins, credentials: allowedOrigins !== '*' }));
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',');
 app.use(cors({
   origin: allowedOrigins ?? '*',
