@@ -4,8 +4,8 @@
 
 name = "autoecoops-ecosystem"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = "./frontend/project-01/.vercel/output/static"
+pages_build_output_dir = "./frontend/project-01/out"
 
 # For Cloudflare Pages deployment
-# The build command should be: cd frontend/project-01 && pnpm install && pnpm run pages:build
-# The output directory should be: frontend/project-01/.vercel/output/static
+# The build command should be: cd frontend/project-01 && pnpm install && pnpm run build
+# The output directory should be: frontend/project-01/out

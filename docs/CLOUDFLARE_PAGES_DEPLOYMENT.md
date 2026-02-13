@@ -20,7 +20,7 @@
 ```toml
 name = "autoecoops-ecosystem"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = "./frontend/project-01/.vercel/output/static"
+pages_build_output_dir = "./frontend/project-01/out"
 ```
 
 ### 2. 更新 Next.js 配置

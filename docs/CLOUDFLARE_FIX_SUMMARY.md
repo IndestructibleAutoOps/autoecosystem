@@ -54,13 +54,13 @@ format = "service-worker"
 ```toml
 name = "autoecoops-ecosystem"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = "./frontend/project-01/.vercel/output/static"
+pages_build_output_dir = "./frontend/project-01/out"
 ```
 
 **改進說明:**
 - 移除了 Workers 相關配置（`type`, `workers_dev`, `route`, `zone_id`）
 - 改為 Cloudflare Pages 配置
-- 添加了正確的輸出目錄路徑
+- 添加了正確的輸出目錄路徑（Next.js 靜態導出的 `out` 目錄）
 
 ### 2. 更新 Next.js 配置
 
