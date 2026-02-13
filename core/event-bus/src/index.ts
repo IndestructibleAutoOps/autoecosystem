@@ -13,7 +13,7 @@ const app = express();
 
 app.use(helmet());
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',');
-app.use(cors({ origin: allowedOrigins ?? '*', credentials: Boolean(allowedOrigins) }));
+app.use(cors({ origin: allowedOrigins ?? '*', credentials: Boolean(process.env.ALLOWED_ORIGINS) }));
 app.use(express.json({ limit: '5mb' }));
 app.use(compression());
 app.use(pinoHttp({ logger, autoLogging: { ignore: (req) => req.url === '/health' } }));
