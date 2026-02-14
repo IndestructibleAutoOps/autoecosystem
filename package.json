@@ -40,6 +40,11 @@
     "build:sdk": "cd sdk/typescript && pnpm build",
     "test:core": "pnpm -r --filter './core/*' test",
     "test:platforms": "pnpm -r --filter './platforms/*' test",
+    "db:migrate": "cd platforms/platform-1 && pnpm run db:migrate",
+    "db:seed": "cd platforms/platform-1 && pnpm run db:seed",
+    "db:studio": "cd platforms/platform-1 && pnpm run db:studio",
+    "docker:dev": "cd platforms/platform-1 && pnpm run docker:dev",
+    "docker:down": "cd platforms/platform-1 && pnpm run docker:down",
     "setup:platform-1": "cd platforms/platform-1 && pnpm run setup",
     "analyze:bundle": "turbo run analyze:bundle"
   },
@@ -55,7 +60,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "next": "^16.1.6"
+    "next": "^15.0.8"
   },
   "pnpm": {
     "overrides": {

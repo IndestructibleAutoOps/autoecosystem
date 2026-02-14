@@ -9,15 +9,14 @@ const updateProjectSchema = z.object({
 });
 
 interface RouteParams {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
     if (authError || !user) {
@@ -27,7 +26,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     const { data: project, error } = await supabase
       .from('projects')
       .select('*')
-      .eq('id', id)
+      .eq('id', params.id)
       .eq('user_id', user.id)
       .single();
 
@@ -50,8 +49,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
     if (authError || !user) {
@@ -68,7 +66,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         ...validatedData,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', id)
+      .eq('id', params.id)
       .eq('user_id', user.id)
       .select()
       .single();
@@ -95,8 +93,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = await params;
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
     if (authError || !user) {
@@ -106,7 +103,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     const { error } = await supabase
       .from('projects')
       .delete()
-      .eq('id', id)
+      .eq('id', params.id)
       .eq('user_id', user.id);
 
     if (error) {

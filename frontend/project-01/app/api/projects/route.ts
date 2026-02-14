@@ -10,7 +10,7 @@ const createProjectSchema = z.object({
 
 export async function GET() {
   try {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
     if (authError || !user) {
@@ -39,7 +39,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
     if (authError || !user) {
@@ -51,7 +51,6 @@ export async function POST(request: NextRequest) {
 
     const { data: project, error } = await supabase
       .from('projects')
-      // @ts-expect-error - Supabase types don't correctly infer insert payload with spread operators
       .insert([
         {
           ...validatedData,
