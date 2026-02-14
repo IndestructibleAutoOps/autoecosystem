@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     const { data: project, error } = await supabase
       .from('projects')
-      // @ts-expect-error - Supabase generated types may not correctly infer the insert payload shape with spread operators. This is a known issue with TypeScript's type inference for Supabase's insert() method when combining validated data with additional fields.
+      // @ts-expect-error - Supabase types don't correctly infer insert payload with spread operators
       .insert([
         {
           ...validatedData,

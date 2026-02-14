@@ -68,7 +68,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Cloudflare Pages build configuration
 [build]
-command = "cd frontend/project-01 && npm install && npm run build:cf"
+command = "cd frontend/project-01 && pnpm install && pnpm build:cf"
 cwd = "."
 watch_paths = ["frontend/project-01/**/*.{ts,tsx,js,jsx,json,css}"]
 ```
@@ -98,6 +98,22 @@ const config: OpenNextConfig = {
     override: {
       wrapper: "cloudflare-node",
       converter: "edge",
+      proxyExternalRequest: "fetch",
+      incrementalCache: "dummy",
+      tagCache: "dummy",
+      queue: "dummy",
+    },
+  },
+  edgeExternals: ["node:crypto"],
+  middleware: {
+    external: true,
+    override: {
+      wrapper: "cloudflare-edge",
+      converter: "edge",
+      proxyExternalRequest: "fetch",
+      incrementalCache: "dummy",
+      tagCache: "dummy",
+      queue: "dummy",
     },
   },
 };
