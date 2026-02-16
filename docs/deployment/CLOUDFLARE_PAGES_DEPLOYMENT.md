@@ -1,27 +1,23 @@
 # Cloudflare Pages Deployment Guide
 
-> **⚠️ DEPRECATED:** This documentation is outdated. The root `wrangler.toml` file referenced in this guide has been removed.
+> **⚠️ DEPRECATED:** This documentation is outdated and kept for historical reference only.
+> 
+> **The root `wrangler.toml` file has been removed** and is no longer used for Cloudflare Pages deployment.
 > 
 > **Please refer to:** [`CLOUDFLARE_PAGES_SETUP.md`](../../CLOUDFLARE_PAGES_SETUP.md) in the repository root for current deployment instructions.
 
 ---
 
-## Overview
+## Historical Information (Obsolete)
 
-This guide explains how to deploy the frontend application (`frontend/project-01`) to Cloudflare Pages using the OpenNext Cloudflare adapter.
+The information below describes the old configuration approach and is **no longer applicable**. It is kept only for historical reference.
 
-## Build Configuration
+### Previous Repository Configuration (No Longer Used)
 
-The build configuration is managed in two places:
-
-### 1. Repository Configuration (`wrangler.toml`)
-
-> **⚠️ NOTE:** The root `wrangler.toml` file has been removed. This section is kept for historical reference only.
-
-Located at the repository root, this file contains the build settings used by Cloudflare Pages:
+Previously, a root `wrangler.toml` file was used at the repository root with build settings for Cloudflare Pages:
 
 ```toml
-# Cloudflare Pages build configuration
+# Cloudflare Pages build configuration (OBSOLETE - NO LONGER USED)
 [build]
 pages_build_output_dir = "frontend/project-01/.open-next/assets"
 command = "pnpm install --no-frozen-lockfile && pnpm --filter \"./frontend/project-01...\" run build:cf"
@@ -29,15 +25,13 @@ cwd = "."
 watch_paths = ["frontend/project-01/**/*.{ts,tsx,js,jsx,json,css}"]
 ```
 
-**Key Points:**
-- `pages_build_output_dir`: Points to the exact location where OpenNext generates the Cloudflare-compatible build output
-- `command`: Uses pnpm filter with **path-based selection** (`./frontend/project-01...`) instead of package name
-- Path-based filtering ensures the build won't break if the package name changes (e.g., from `autoecoops-frontend` to `machops-frontend`)
-- The `...` suffix includes the package and all its dependencies
+This file has been removed. The current deployment configuration is managed through:
+1. The `build:cf` script in `frontend/project-01/package.json`
+2. Cloudflare Pages dashboard settings
 
-### 2. Cloudflare Pages Dashboard Settings
+### Current Approach
 
-When configuring your Cloudflare Pages project in the dashboard:
+See [`CLOUDFLARE_PAGES_SETUP.md`](../../CLOUDFLARE_PAGES_SETUP.md) for:
 
 | Setting | Value | Notes |
 |---------|-------|-------|
